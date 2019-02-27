@@ -135,7 +135,21 @@ class WebPack
 			echo "\n";
 		}
 
-		//	...
+		//	Set empty array.
 		self::Session($ext, []);
+	}
+
+	/** Generate unique hash key by stacked files.
+	 *
+	 * @param	 string		 $extension
+	 * @return	 string		 $hash
+	 */
+	static function Hash($ext)
+	{
+		$temp = self::Session($ext);
+		$temp = json_encode($temp);
+		$temp = md5($temp);
+		$temp = substr($temp, 0, 8);
+		return $temp .'.'. \Env::Get('OP\UNIT\WebPack\Serial');
 	}
 }
