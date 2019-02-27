@@ -15,6 +15,12 @@
  */
 namespace OP\UNIT;
 
+/** Used class
+ *
+ */
+use OP\Env;
+use OP\Notice;
+
 /** WebPack
  *
  * @creation  2018-04-12
@@ -23,29 +29,29 @@ namespace OP\UNIT;
  * @author    Tomoaki Nagahara <tomoaki.nagahara@gmail.com>
  * @copyright Tomoaki Nagahara All right reserved.
  */
-class WebPack
+class WebPack implements \OP\IF_UNIT
 {
 	/** trait
 	 *
 	 */
-	use \OP_CORE, \OP_SESSION;
+	use \OP\OP_CORE, \OP\OP_UNIT;
 
 	/** Set js file path.
 	 *
 	 * @param string $path
 	 */
-	static function Js($path)
+	function Js($path)
 	{
-		self::Set('js', $path);
+		$this->Set('js', $path);
 	}
 
 	/** Set css file path.
 	 *
 	 * @param string $path
 	 */
-	static function Css($path)
+	function Css($path)
 	{
-		self::Set('css', $path);
+		$this->Set('css', $path);
 	}
 
 	/** Set file path. Store to session.
@@ -54,7 +60,7 @@ class WebPack
 	 * @param string|array $file_path
 	 * @param boolean      $prepend true is head, false is foot.
 	 */
-	static function Set($ext, $path, $prepend=false)
+	function Set($ext, $path, $prepend=false)
 	{
 		//	Check extension.
 		if( empty($ext) ){
@@ -63,7 +69,7 @@ class WebPack
 		}
 
 		//	Get session by extension.
-		$session = self::Session($ext);
+		$session = & $this->Session($ext);
 
 		//	For Eclipse (Undefined error)
 		$list = [];
@@ -78,7 +84,7 @@ class WebPack
 		}else{
 			//	Empty array.
 			$list = [];
-		}
+		};
 
 		//	Add to head or foot.
 		if( empty($list) ){
@@ -98,9 +104,6 @@ class WebPack
 		 *  2. And, passed argument value there is a already duplicate possibility.
 		 */
 		$session = array_unique($session);
-
-		//	Set session by extension.
-		self::Session($ext, $session);
 	}
 
 	/** Get packed string each extension.
@@ -108,16 +111,16 @@ class WebPack
 	 * @param  string $extension
 	 * @return string $string
 	 */
-	static function Get($ext)
+	function Get($ext)
 	{
 		//	...
 		if(!ob_start()){
-			\Notice::Set("ob_start was failed.");
+			Notice::Set("ob_start was failed.");
 			return;
 		}
 
 		//	...
-		self::Out($ext);
+		$this->Out($ext);
 
 		//	...
 		return ob_get_clean();
@@ -127,16 +130,16 @@ class WebPack
 	 *
 	 * @param string $extension
 	 */
-	static function Out($ext)
+	function Out($ext)
 	{
 		//	...
-		foreach( self::Session($ext) as $file_path ){
-			\App::Template($file_path.'.'.$ext);
+		foreach( $this->Session($ext) as $file_path ){
+			$this->Unit('App')->Template($file_path.'.'.$ext);
 			echo "\n";
 		}
 
 		//	Set empty array.
-		self::Session($ext, []);
+		$this->Session($ext, []);
 	}
 
 	/** Generate unique hash key by stacked files.
@@ -144,12 +147,12 @@ class WebPack
 	 * @param	 string		 $extension
 	 * @return	 string		 $hash
 	 */
-	static function Hash($ext)
+	function Hash($ext)
 	{
-		$temp = self::Session($ext);
+		$temp = $this->Session($ext);
 		$temp = json_encode($temp);
 		$temp = md5($temp);
 		$temp = substr($temp, 0, 8);
-		return $temp .'.'. \Env::Get('OP\UNIT\WebPack\Serial');
+		return $temp .'.'. Env::Get('OP\UNIT\WebPack\Serial');
 	}
 }

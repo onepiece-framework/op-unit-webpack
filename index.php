@@ -10,6 +10,3 @@
  */
 //	...
 include(__DIR__.'/WebPack.class.php');
-
-//	...
-return true;
