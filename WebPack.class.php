@@ -18,6 +18,9 @@ namespace OP\UNIT;
 /** Used class
  *
  */
+use OP\OP_CORE;
+use OP\OP_UNIT;
+use OP\IF_UNIT;
 use OP\Env;
 use OP\Notice;
 
@@ -29,12 +32,38 @@ use OP\Notice;
  * @author    Tomoaki Nagahara <tomoaki.nagahara@gmail.com>
  * @copyright Tomoaki Nagahara All right reserved.
  */
-class WebPack implements \OP\IF_UNIT
+class WebPack implements IF_UNIT
 {
 	/** trait
 	 *
 	 */
-	use \OP\OP_CORE, \OP\OP_UNIT;
+	use OP_CORE, OP_UNIT;
+
+	/** Automatically registration and output.
+	 *
+	 */
+	function Auto($list)
+	{
+		//	...
+		foreach( $list as $path ){
+			//	...
+			if(!file_exists($path) ){
+				Notice::Set("This file has not been exists. ($path)");
+				continue;
+			};
+
+			//	...
+			$path = realpath($path);
+
+			//	...
+			$pos  = strrpos($path, '.');
+			$ext  = substr($path, $pos+1);
+			$path = substr($path, 0, $pos);
+
+			//	...
+			$this->Set($ext, $path);
+		};
+	}
 
 	/** Set js file path.
 	 *
