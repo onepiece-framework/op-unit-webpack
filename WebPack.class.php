@@ -166,8 +166,15 @@ class WebPack implements IF_UNIT
 	function Out($ext)
 	{
 		//	...
-		foreach( $this->Session($ext) as $file_path ){
+		$list = include(ConvertPath('app:/webpack/action.php'));
+
+		//	...
+		foreach( array_merge($list, ($this->Session($ext) ?? [])) as $file_path ){
+
+			//	...
 			$this->Unit('App')->Template($file_path.'.'.$ext);
+
+			//	...
 			echo "\n";
 		}
 
