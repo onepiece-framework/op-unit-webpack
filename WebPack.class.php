@@ -174,18 +174,4 @@ class WebPack implements IF_UNIT
 		//	Set empty array.
 		$this->Session($ext, []);
 	}
-
-	/** Generate unique hash key by stacked files.
-	 *
-	 * @param	 string		 $extension
-	 * @return	 string		 $hash
-	 */
-	function Hash($ext)
-	{
-		$temp = $this->Session($ext);
-		$temp = json_encode($temp);
-		$temp = md5($temp);
-		$temp = substr($temp, 0, 8);
-		return $temp .'.'. Env::Get('OP\UNIT\WebPack\Serial');
-	}
 }
