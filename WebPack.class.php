@@ -41,11 +41,15 @@ class WebPack implements IF_UNIT
 
 	/** Automatically registration and output.
 	 *
+	 * @param  string|array  $list
 	 */
 	function Auto($list)
 	{
 		//	...
-		foreach( $list as $path ){
+		foreach( is_string($list) ? explode(',', $list): $list as $path ){
+			//	...
+			$path = trim($path);
+
 			//	...
 			if(!file_exists($path) ){
 				Notice::Set("This file has not been exists. ($path)");
