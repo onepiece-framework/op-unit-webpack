@@ -18,11 +18,12 @@ namespace OP\UNIT;
 /** Used class
  *
  */
+use OP\IF_UNIT;
 use OP\OP_CORE;
 use OP\OP_UNIT;
-use OP\IF_UNIT;
-use OP\Env;
+use OP\OP_SESSION;
 use OP\Notice;
+use function OP\ConvertPath;
 
 /** WebPack
  *
@@ -37,7 +38,7 @@ class WebPack implements IF_UNIT
 	/** trait
 	 *
 	 */
-	use OP_CORE, OP_UNIT;
+	use OP_CORE, OP_UNIT, OP_SESSION;
 
 	/** Automatically registration and output.
 	 *
