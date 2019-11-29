@@ -173,7 +173,8 @@ class WebPack implements IF_UNIT
 		foreach( array_merge($list, ($this->Session($ext) ?? [])) as $file_path ){
 
 			//	...
-			$this->Unit('App')->Template($file_path.'.'.$ext);
+			$app = \OP\Unit::Singleton('App');
+			$app->Template($file_path.'.'.$ext);
 
 			//	...
 			echo "\n";
