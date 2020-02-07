@@ -21,6 +21,7 @@ use OP\IF_UNIT;
 use OP\OP_CORE;
 use OP\OP_UNIT;
 use OP\OP_SESSION;
+use OP\Env;
 use OP\Notice;
 use function OP\ConvertPath;
 
@@ -38,6 +39,52 @@ class WebPack implements IF_UNIT
 	 *
 	 */
 	use OP_CORE, OP_UNIT, OP_SESSION;
+
+	/** WebPack directory.
+	 *
+	 *  For separate each WebPack directory.
+	 *
+	 * <pre>
+	 * //  Instantiate
+	 * $webpack1 = Unit::Instantiate('WebPack');
+	 * $webpack2 = Unit::Instantiate('WebPack');
+	 *
+	 * //  Set different directory.
+	 * $webpack1->Directory('app:/webpack1/');
+	 * $webpack2->Directory('app:/webpack2/');
+	 *
+	 * //  Output different webpack.
+	 * $webpack1->Out();
+	 * $webpack2->Out();
+	 * </pre>
+	 *
+	 * @created   2020-02-07
+	 * @param     string
+	 * @return    string
+	 */
+	function Directory($path=null)
+	{
+		//	...
+		static $_directory;
+
+		//	...
+		if( $path ){
+			$_directory = ConvertPath(path);
+		}
+
+		//	...
+		if(!$_directory ){
+			$_directory = Env::Get('webpack')['directory'] ?? null;
+		}
+
+		//	...
+		if(!$_directory ){
+			throw new \Exception("WebPack directory is not set.\n Env::Set('webpack',['directory'=>\$path])");
+		}
+
+		//	...
+		return $_directory;
+	}
 
 	/** Automatically registration and output.
 	 *
@@ -165,8 +212,11 @@ class WebPack implements IF_UNIT
 	 */
 	function Out($ext)
 	{
+		//	Get target directory.
+		$path = self::Directory();
+
 		//	...
-		$list = include(ConvertPath('app:/webpack/action.php'));
+		$list = include(rtrim($path, '/') . '/action.php');
 
 		//	...
 		foreach( array_merge($list, ($this->Session($ext) ?? [])) as $file_path ){
