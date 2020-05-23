@@ -17,10 +17,10 @@ namespace OP\UNIT;
 /** Used class
  *
  */
-use OP\IF_UNIT;
 use OP\OP_CORE;
 use OP\OP_UNIT;
 use OP\OP_SESSION;
+use OP\IF_UNIT;
 use OP\Env;
 use OP\Notice;
 use function OP\ConvertPath;
@@ -259,5 +259,19 @@ class WebPack implements IF_UNIT
 
 		//	...
 		return $_hash[$ext];
+
+		/*
+		//	...
+		$session = $this->Session($ext);
+
+		//	...
+		$hash = substr(md5($this->Get($ext)), 0, 8);
+
+		//	...
+		$this->Session($ext, $session);
+
+		//	...
+		return $hash;
+		*/
 	}
 }
