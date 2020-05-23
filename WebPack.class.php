@@ -242,7 +242,7 @@ class WebPack implements IF_UNIT
 
 	/** Generate unique hash key by stacked files name.
 	 *
-	 * @deprecated
+	 * @deprecated 2020-05-23
 	 * @param   string     $extension
 	 * @return  string     hash
 	 */
