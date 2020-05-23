@@ -1,10 +1,9 @@
 <?php
-/**
- * unit-webpack:/WebPack.class.php
+/** op-unit-webpack:/WebPack.class.php
  *
  * @creation  2018-04-12
  * @version   1.0
- * @package   unit-webpack
+ * @package   op-unit-webpack
  * @author    Tomoaki Nagahara <tomoaki.nagahara@gmail.com>
  * @copyright Tomoaki Nagahara All right reserved.
  */
