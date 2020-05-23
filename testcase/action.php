@@ -1,16 +1,30 @@
 <?php
-/**
- * module-testcase:/unit/webpack/action.php
+/** op-unit-webpack:/testcase/action.php
  *
- * @creation  2019-03-22
+ * @creation  2020-05-22
  * @version   1.0
- * @package   module-testcase
+ * @package   op-unit-webpack
  * @author    Tomoaki Nagahara <tomoaki.nagahara@gmail.com>
  * @copyright Tomoaki Nagahara All right reserved.
  */
-/* @var $app     \OP\UNIT\App     */
+
+/** namespace
+ *
+ */
+namespace OP;
+
 /* @var $webpack \OP\UNIT\WebPack */
-/* @var $args     array           */
-$webpack = $app->Unit('WebPack');
+$webpack = Unit('WebPack');
 $webpack->Auto('testcase.js');
-$webpack->Auto('testcase.js');
+$webpack->Auto('testcase.css');
+
+D($_SESSION);
+
+?>
+<div id="testcase">
+	<div class="webpack">
+		<p>TESTCASE</p>
+		<div class="js" >JS  : </div>
+		<div class="css">CSS : </div>
+	</div>
+</div>
