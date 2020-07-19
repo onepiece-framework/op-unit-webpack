@@ -75,6 +75,7 @@ class WebPack implements IF_UNIT
 		//	...
 		if(!$_directory ){
 			$_directory = Env::Get('webpack')['directory'] ?? null;
+			$_directory = ConvertPath($_directory);
 		}
 
 		//	...
