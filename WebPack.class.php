@@ -22,6 +22,7 @@ use OP\OP_UNIT;
 use OP\OP_SESSION;
 use OP\IF_UNIT;
 use OP\Env;
+use OP\Config;
 use OP\Notice;
 use function OP\ConvertPath;
 
@@ -74,8 +75,13 @@ class WebPack implements IF_UNIT
 
 		//	...
 		if(!$_directory ){
-			$_directory = Env::Get('webpack')['directory'] ?? 'app:/webpack';
-			$_directory = ConvertPath($_directory);
+			//	...
+			$config = Config::Get('webpack');
+
+			//	...
+			if( $_directory = $config['directory'] ?? null ){
+				$_directory = ConvertPath($_directory);
+			}
 		}
 
 		//	...
