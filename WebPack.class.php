@@ -25,6 +25,7 @@ use OP\Env;
 use OP\Config;
 use OP\Notice;
 use function OP\ConvertPath;
+use function OP\Unit;
 
 /** WebPack
  *
@@ -229,7 +230,7 @@ class WebPack implements IF_UNIT
 		foreach( array_merge($list, ($this->Session($ext) ?? [])) as $file_path ){
 
 			//	...
-			$app = \OP\Unit::Singleton('App');
+			$app = Unit('App');
 			$app->Template($file_path.'.'.$ext);
 
 			//	...
