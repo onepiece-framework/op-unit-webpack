@@ -24,9 +24,9 @@ use OP\IF_UNIT;
 use OP\Env;
 use OP\Config;
 use OP\Notice;
-use function OP\ConvertPath;
 use function OP\Unit;
 use function OP\Template;
+use function OP\ConvertPath;
 use function OP\CompressPath;
 
 /** WebPack
@@ -222,6 +222,14 @@ class WebPack implements IF_UNIT
 	 */
 	function Out($ext)
 	{
+		//	...
+		static $_is_admin;
+
+		//	...
+		if( $_is_admin === NULL ){
+			$_is_admin = Env::isAdmin();
+		}
+
 		//	Get target directory.
 		$path = self::Directory();
 
@@ -230,6 +238,12 @@ class WebPack implements IF_UNIT
 
 		//	...
 		foreach( array_merge($list, ($this->Session($ext) ?? [])) as $file_path ){
+
+			//	...
+			if( $_is_admin ){
+				$meta_path = CompressPath($file_path);
+				echo "/* {$meta_path} */\n";
+			}
 
 			//	...
 			Template(CompressPath($file_path.'.'.$ext));
