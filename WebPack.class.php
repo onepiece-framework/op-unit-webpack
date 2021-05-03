@@ -26,6 +26,8 @@ use OP\Config;
 use OP\Notice;
 use function OP\ConvertPath;
 use function OP\Unit;
+use function OP\Template;
+use function OP\CompressPath;
 
 /** WebPack
  *
@@ -230,8 +232,7 @@ class WebPack implements IF_UNIT
 		foreach( array_merge($list, ($this->Session($ext) ?? [])) as $file_path ){
 
 			//	...
-			$app = Unit('App');
-			$app->Template($file_path.'.'.$ext);
+			Template(CompressPath($file_path.'.'.$ext));
 
 			//	...
 			echo "\n";
