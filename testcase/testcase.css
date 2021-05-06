@@ -1,4 +1,4 @@
-<?php
+
 /** op-unit-webpack:/testcase/testcase.css
  *
  * @creation  2020-05-22
@@ -7,6 +7,7 @@
  * @author    Tomoaki Nagahara <tomoaki.nagahara@gmail.com>
  * @copyright Tomoaki Nagahara All right reserved.
  */
+
 #testcase .css:after {
 	content: "Successful";
 }
