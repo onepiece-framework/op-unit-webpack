@@ -108,6 +108,12 @@ class WebPack implements IF_UNIT
 			$path = trim($path);
 
 			//	...
+			if( strpos(" $path", '..') ){
+				Notice::Set("Can not specify parent directory. ($path)");
+				continue;
+			}
+
+			//	...
 			if(!file_exists($path) ){
 				Notice::Set("This file has not been exists. ($path)");
 				continue;
