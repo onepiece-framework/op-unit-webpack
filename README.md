@@ -7,14 +7,13 @@ Unit of WebPack
 
 # Usage
 
-## Set the file path
-
 ```
-//  Set the file path one by one.
-Unit('WebPack')->Set('js', 'a.js');
+//  Add to One by One.
+OP()->Unit('WebPack')->Auto('file_name.js');
+OP()->Unit('WebPack')->Auto('file_name.css');
 
-//  Set the file path collectively.
-Unit('WebPack')->Set('css', ['a.css','b.css']);
+//  Add to Bulk.
+OP()->Unit('WebPack')->Auto('file_name.js','file_name.css');
 ```
 
 ## Output the content from the registered file path
@@ -22,7 +21,7 @@ Unit('WebPack')->Set('css', ['a.css','b.css']);
  Call from webpack directory. For example, `app/:webpack/index.php`.
 
 ```php
-Unit('WebPack')->Out('css');
+OP()->Unit('WebPack')->Out('css');
 ```
 
 ## For html.
