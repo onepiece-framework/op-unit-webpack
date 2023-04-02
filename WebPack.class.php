@@ -28,6 +28,7 @@ use function OP\Unit;
 use function OP\Template;
 use function OP\ConvertPath;
 use function OP\CompressPath;
+use function OP\RootPath;
 
 /** WebPack
  *
@@ -62,39 +63,32 @@ class WebPack implements IF_UNIT
 	 * $webpack2->Out();
 	 * </pre>
 	 *
-	 * @created   2020-02-07
-	 * @param     string
-	 * @return    string
+	 * @created    2020-02-07
+	 * @changed    2023-04-01  Directory --> Directories
+	 * @param      string
+	 * @return     array
 	 */
-	function Directory($path=null)
-	{
-		//	...
-		static $_directory;
+    function Directories(?string $path=null):array
+    {
+        //  ...
+        static $_directories = null;
 
-		//	...
-		if( $path ){
-			$_directory = ConvertPath(path);
-		}
+        //	...
+        if( $_directories === null ){
+            //	...
+            foreach( Config::Get('webpack')['directories'] ?? [] as $directory ){
+                $_directories[] = ConvertPath($directory);
+            }
+        }
 
-		//	...
-		if(!$_directory ){
-			//	...
-			$config = Config::Get('webpack');
+        //	...
+        if( $path ){
+            $_directories[] = ConvertPath($path);
+        }
 
-			//	...
-			if( $_directory = $config['directory'] ?? null ){
-				$_directory = ConvertPath($_directory);
-			}
-		}
-
-		//	...
-		if(!$_directory ){
-			throw new \Exception("WebPack directory is not set.\n Env::Set('webpack',['directory'=>\$path])");
-		}
-
-		//	...
-		return $_directory;
-	}
+        //	...
+        return $_directories;
+    }
 
 	/** Automatically registration and output.
 	 *
