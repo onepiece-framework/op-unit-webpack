@@ -228,35 +228,19 @@ class WebPack implements IF_UNIT
 	 */
 	function Out($ext)
 	{
-		//	...
-		static $_is_admin;
+        // ...
+        self::_OutDir( self::Directories(), $ext );
+
+        //  ...
+        if( $layout = OP()->Request('layout') ?? OP()->Layout() ){
+            $root = RootPath('asset');
+            self::_OutDir(["{$root}/layout/{$layout}/{$ext}/"], $ext);
+        }
 
 		//	...
-		if( $_is_admin === NULL ){
-			$_is_admin = Env::isAdmin();
-		}
-
-		//	Get target directory.
-		$path = self::Directory();
-
-		//	...
-		$list = include(rtrim($path, '/') . '/action.php');
-
-		//	...
-		foreach( array_merge($list, ($this->Session($ext) ?? [])) as $file_path ){
-
-			//	...
-			if( $_is_admin ){
-				$meta_path = CompressPath($file_path);
-				echo "/* {$meta_path} */\n";
-			}
-
-			//	...
-			Template(CompressPath($file_path.'.'.$ext));
-
-			//	...
-			echo "\n";
-		}
+        foreach( $this->Session($ext) ?? [] as $file ){
+            self::_OutFile($file);
+        }
 
 		//	Set empty array.
 		$this->Session($ext, []);
