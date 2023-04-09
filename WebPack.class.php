@@ -241,6 +241,9 @@ class WebPack implements IF_UNIT
             if( empty($file) ){
                 continue;
             }
+            $dir  = dirname($file);
+            $file = basename($file, ".{$ext}"); // Remove extension.
+            $file = "{$dir}/{$file}.{$ext}";    // Add extension.
             self::_OutFile($file);
         }
 
