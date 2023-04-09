@@ -238,6 +238,9 @@ class WebPack implements IF_UNIT
 
 		//	...
         foreach( $this->Session($ext) ?? [] as $file ){
+            if( empty($file) ){
+                continue;
+            }
             self::_OutFile($file);
         }
 
