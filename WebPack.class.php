@@ -257,12 +257,21 @@ class WebPack implements IF_UNIT
 
 			//	...
 			if( $_is_admin ){
-				$meta_path = CompressPath($file_path);
-				echo "/* {$meta_path} */\n";
+				echo "/* $file_path, $ext */\n";
 			}
 
 			//	...
-			Template(CompressPath($file_path.'.'.$ext));
+			$file_path .= ".{$ext}";
+			$meta_path  = CompressPath($file_path);
+
+			//	...
+			if(!$meta_path ){
+				Notice::Set("This file is not git root path. ($file_path)");
+				continue;
+			};
+
+			//	...
+			Template($meta_path);
 
 			//	...
 			echo "\n";
