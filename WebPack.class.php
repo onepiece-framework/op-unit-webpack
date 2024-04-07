@@ -244,6 +244,14 @@ class WebPack implements IF_UNIT
 
 		//	...
 		foreach( array_merge($list, ($this->Session($ext) ?? [])) as $file_path ){
+			//	...
+			$full_path = $file_path.'.'.$ext;
+
+			//	...
+			if(!file_exists($full_path) ){
+				OP()->Notice("This file does not exists. ({$full_path})");
+				continue;
+			}
 
 			//	...
 			if( $_is_admin ){
