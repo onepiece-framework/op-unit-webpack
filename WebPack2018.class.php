@@ -27,6 +27,12 @@ use function OP\Unit;
 use function OP\Template;
 use function OP\ConvertPath;
 use function OP\CompressPath;
+use OP\UNIT\WEBPACK\OP_WEBPACK_2018;
+
+/** Include
+ *
+ */
+include_once(__DIR__.'/WEBPACK2018.trait.php');
 
 /** WebPack
  *
@@ -42,6 +48,7 @@ class WebPack implements IF_UNIT
 	 *
 	 */
 	use OP_CORE, OP_UNIT, OP_SESSION;
+	use OP_WEBPACK_2018;
 
 	/** Automatically registration and output.
 	 *
