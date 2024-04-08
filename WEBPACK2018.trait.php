@@ -152,4 +152,64 @@ trait OP_WEBPACK_2018
 		//	...
 		return ob_get_clean();
 	}
+
+	/** Output packed string each extension.
+	 *
+	 * @moved 2024-04-08  WebPack2018.class.php --> WEBPACK2018.trait.php
+	 * @param string $extension
+	 */
+	public function Out($ext)
+	{
+		//	...
+		static $_is_admin;
+
+		//	...
+		if( $_is_admin === NULL ){
+			$_is_admin = OP()->Env()->isAdmin();
+		}
+
+		//	Get target directory.
+		$list = [];
+		$path = self::Directory();
+		$path = "{$path}/{$ext}/action.php";
+		if( file_exists($path) ){
+			$list = include($path);
+		};
+
+		//	...
+		foreach( array_merge($list, ($this->Session($ext) ?? [])) as $file_path ){
+			//	...
+			$full_path = $file_path.'.'.$ext;
+
+			//	...
+			if(!file_exists($full_path) ){
+				OP()->Notice("This file does not exists. ({$full_path})");
+				continue;
+			}
+
+			//	...
+			if( $_is_admin ){
+				echo "/* $file_path, $ext */\n";
+			}
+
+			//	...
+			$file_path .= ".{$ext}";
+			$meta_path  = CompressPath($file_path);
+
+			//	...
+			if(!$meta_path ){
+				OP()->Notice("This file is not git root path. ($file_path)");
+				continue;
+			};
+
+			//	...
+			Template($meta_path);
+
+			//	...
+			echo "\n";
+		}
+
+		//	Set empty array.
+		$this->Session($ext, []);
+	}
 }
