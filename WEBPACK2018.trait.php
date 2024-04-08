@@ -212,4 +212,57 @@ trait OP_WEBPACK_2018
 		//	Set empty array.
 		$this->Session($ext, []);
 	}
+
+	/** WebPack directory.
+	 *
+	 *  For separate each WebPack directory.
+	 *
+	 * <pre>
+	 * //  Instantiate
+	 * $webpack1 = Unit::Instantiate('WebPack');
+	 * $webpack2 = Unit::Instantiate('WebPack');
+	 *
+	 * //  Set different directory.
+	 * $webpack1->Directory('app:/webpack1/');
+	 * $webpack2->Directory('app:/webpack2/');
+	 *
+	 * //  Output different webpack.
+	 * $webpack1->Out();
+	 * $webpack2->Out();
+	 * </pre>
+	 *
+	 * @created   2020-02-07
+	 * @moved     2024-04-08  WebPack2018.class.php --> WEBPACK2018.trait.php
+	 * @param     string
+	 * @return    string
+	 */
+	public static function Directory($path=null)
+	{
+		//	...
+		static $_directory;
+
+		//	...
+		if( $path ){
+			$_directory = ConvertPath(path);
+		}
+
+		//	...
+		if(!$_directory ){
+			//	...
+			$config = OP()->Config('webpack');
+
+			//	...
+			if( $_directory = $config['directory'] ?? null ){
+				$_directory = ConvertPath($_directory);
+			}
+		}
+
+		//	...
+		if(!$_directory ){
+			OP()->Notice("WebPack directory is not set.\n Env::Set('webpack',['directory'=>\$path])");
+		}
+
+		//	...
+		return $_directory;
+	}
 }
