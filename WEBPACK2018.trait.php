@@ -21,6 +21,7 @@ namespace OP\UNIT\WEBPACK;
 /** use
  *
  */
+use function OP\ConvertPath;
 
 /** WebPack
  *
