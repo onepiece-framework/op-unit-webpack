@@ -155,26 +155,6 @@ class WebPack implements IF_UNIT
 		$session = array_unique($session);
 	}
 
-	/** Get packed string each extension.
-	 *
-	 * @param  string $extension
-	 * @return string $string
-	 */
-	function Get($ext)
-	{
-		//	...
-		if(!ob_start()){
-			Notice::Set("ob_start was failed.");
-			return;
-		}
-
-		//	...
-		$this->Out($ext);
-
-		//	...
-		return ob_get_clean();
-	}
-
 	/** Output packed string each extension.
 	 *
 	 * @param string $extension
