@@ -88,4 +88,47 @@ trait OP_WEBPACK_2018
 		//	Register.
 		self::Auto($file_path);
 	}
+
+	/** Generate unique hash key by stacked files.
+	 *
+	 * @created  2019-04-06
+	 * @moved    2024-04-08  WebPack2018.class.php --> WEBPACK2018.trait.php
+	 * @param    string      $extension
+	 * @return   string      $hash
+	 */
+	public function FileContentHash($ext)
+	{
+		//	...
+		static $_hash;
+
+		//	...
+		if( empty($_hash[$ext]) ){
+
+			//	...
+			$session = $this->Session($ext);
+
+			//	Generate hash by content.
+			$_hash[$ext] = substr(md5($this->Get($ext)), 0, 8);
+
+			//	...
+			$this->Session($ext, $session);
+		};
+
+		//	...
+		return $_hash[$ext];
+
+		/*
+		//	...
+		$session = $this->Session($ext);
+
+		//	...
+		$hash = substr(md5($this->Get($ext)), 0, 8);
+
+		//	...
+		$this->Session($ext, $session);
+
+		//	...
+		return $hash;
+		*/
+	}
 }
