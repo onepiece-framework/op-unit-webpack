@@ -228,46 +228,4 @@ class WebPack implements IF_UNIT
 		//	...
 		return $_hash[$ext];
 	}
-
-	/** Generate unique hash key by stacked files.
-	 *
-	 * @created  2019-04-06
-	 * @param    string      $extension
-	 * @return   string      $hash
-	 */
-	function FileContentHash($ext)
-	{
-		//	...
-		static $_hash;
-
-		//	...
-		if( empty($_hash[$ext]) ){
-
-			//	...
-			$session = $this->Session($ext);
-
-			//	Generate hash by content.
-			$_hash[$ext] = substr(md5($this->Get($ext)), 0, 8);
-
-			//	...
-			$this->Session($ext, $session);
-		};
-
-		//	...
-		return $_hash[$ext];
-
-		/*
-		//	...
-		$session = $this->Session($ext);
-
-		//	...
-		$hash = substr(md5($this->Get($ext)), 0, 8);
-
-		//	...
-		$this->Session($ext, $session);
-
-		//	...
-		return $hash;
-		*/
-	}
 }
