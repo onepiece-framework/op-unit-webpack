@@ -131,4 +131,25 @@ trait OP_WEBPACK_2018
 		return $hash;
 		*/
 	}
+
+	/** Get packed string each extension.
+	 *
+	 * @moved  2024-04-08  WebPack2018.class.php --> WEBPACK2018.trait.php
+	 * @param  string $extension
+	 * @return string $string
+	 */
+	public function Get($ext)
+	{
+		//	...
+		if(!ob_start()){
+			OP()->Notice("ob_start was failed.");
+			return;
+		}
+
+		//	...
+		$this->Out($ext);
+
+		//	...
+		return ob_get_clean();
+	}
 }
