@@ -44,58 +44,6 @@ class WebPack implements IF_UNIT
 	 */
 	use OP_CORE, OP_UNIT, OP_SESSION;
 
-	/** WebPack directory.
-	 *
-	 *  For separate each WebPack directory.
-	 *
-	 * <pre>
-	 * //  Instantiate
-	 * $webpack1 = Unit::Instantiate('WebPack');
-	 * $webpack2 = Unit::Instantiate('WebPack');
-	 *
-	 * //  Set different directory.
-	 * $webpack1->Directory('app:/webpack1/');
-	 * $webpack2->Directory('app:/webpack2/');
-	 *
-	 * //  Output different webpack.
-	 * $webpack1->Out();
-	 * $webpack2->Out();
-	 * </pre>
-	 *
-	 * @created   2020-02-07
-	 * @param     string
-	 * @return    string
-	 */
-	function Directory($path=null)
-	{
-		//	...
-		static $_directory;
-
-		//	...
-		if( $path ){
-			$_directory = ConvertPath(path);
-		}
-
-		//	...
-		if(!$_directory ){
-			//	...
-			$config = Config::Get('webpack');
-
-			//	...
-			if( $_directory = $config['directory'] ?? null ){
-				$_directory = ConvertPath($_directory);
-			}
-		}
-
-		//	...
-		if(!$_directory ){
-			Notice::Set("WebPack directory is not set.\n Env::Set('webpack',['directory'=>\$path])");
-		}
-
-		//	...
-		return $_directory;
-	}
-
 	/** Automatically registration and output.
 	 *
 	 * @param  string|array  $list
