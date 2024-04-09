@@ -37,9 +37,9 @@ trait OP_WEBPACK_2018
 	 *
 	 * @deprecated 2024-01-23
 	 * @param      string     $extension
-	 * @param      string     $files
+	 * @param      array      $files
 	 */
-	public static function Set(string $extension, string $files)
+	public static function Set(string $extension, array $files)
 	{
 		//	Add extension.
 		foreach( $files as & $file ){
