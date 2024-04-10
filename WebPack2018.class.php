@@ -254,4 +254,54 @@ class WebPack implements IF_UNIT
 		//	...
 		return ob_get_clean();
 	}
+
+	/** Output packed string each extension.
+	 *
+	 * @param string $extension
+	 */
+	function Out(string $ext)
+	{
+		//	...
+		static $_is_admin;
+
+		//	...
+		if( $_is_admin === NULL ){
+			$_is_admin = Env::isAdmin();
+		}
+
+		//	Get target directory.
+		$list = [];
+		$path = self::Directory();
+		$path = "{$path}/{$ext}/action.php";
+		if( file_exists($path) ){
+			$list = include($path);
+		};
+
+		//	...
+		foreach( array_merge($list, ($this->Session($ext) ?? [])) as $file_path ){
+			//	...
+			if( $_is_admin ){
+				echo "/* $file_path, $ext */\n";
+			}
+
+			//	...
+			$file_path .= ".{$ext}";
+			$meta_path  = CompressPath($file_path);
+
+			//	...
+			if(!$meta_path ){
+				Notice::Set("This file is not git root path. ($file_path)");
+				continue;
+			};
+
+			//	...
+			Template($meta_path);
+
+			//	...
+			echo "\n";
+		}
+
+		//	Set empty array.
+		$this->Session($ext, []);
+	}
 }
