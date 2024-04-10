@@ -234,4 +234,24 @@ class WebPack implements IF_UNIT
 		//	...
 		return $_hash[$ext];
 	}
+
+	/** Get connect code.
+	 *
+	 * @param  string $extension
+	 * @return string $string
+	 */
+	function Get(string $ext)
+	{
+		//	...
+		if(!ob_start()){
+			Notice::Set("ob_start was failed.");
+			return;
+		}
+
+		//	...
+		$this->Out($ext);
+
+		//	...
+		return ob_get_clean();
+	}
 }
