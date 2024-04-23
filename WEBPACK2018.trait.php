@@ -195,7 +195,7 @@ trait OP_WEBPACK_2018
 
 			//	...
 			$file_path .= ".{$ext}";
-			$meta_path  = CompressPath($file_path);
+			$meta_path  = \OP\CompressPath($file_path);
 
 			//	...
 			if(!$meta_path ){
@@ -204,7 +204,7 @@ trait OP_WEBPACK_2018
 			};
 
 			//	...
-			Template($meta_path);
+			\OP\Template($meta_path);
 
 			//	...
 			echo "\n";
