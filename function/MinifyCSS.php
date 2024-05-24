@@ -1,5 +1,5 @@
 <?php
-/** op-unit-webpack:/function/Minify.php
+/** op-unit-webpack:/function/MinifyCSS.php
  *
  * @creation   2023-05-24
  * @version    1.0
@@ -18,7 +18,7 @@ declare(strict_types=1);
  */
 namespace OP\UNIT\WEBPACK;
 
-/** Minify
+/** MinifyCSS
  *
  * @creation   2023-05-24
  * @version    1.0
@@ -26,7 +26,7 @@ namespace OP\UNIT\WEBPACK;
  * @author     Tomoaki Nagahara <tomoaki.nagahara@gmail.com>
  * @copyright  Tomoaki Nagahara All right reserved.
  */
-function Minify($css) {
+function MinifyCSS($css) {
 	//	Remove comment.
 	$css = preg_replace('!/\*.*?\*/!s', '', $css);
 	//	Remove space character.
