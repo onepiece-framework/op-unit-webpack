@@ -26,6 +26,7 @@ $js = [
 //	In case of style sheet.
 $css = [
 	'cache' => '', // file, apcu, memcache
+	'minify'=> true, // File compression. Remove space character and comment.
 ];
 
 //	In case of is Admin.
