@@ -21,6 +21,7 @@ namespace OP\UNIT\WEBPACK;
 //	In case of JavaScript.
 $js = [
 	'cache' => '', // file, apcu, memcache
+	'minify'=> true, // File compression. Remove space character and comment.
 ];
 
 //	In case of style sheet.
