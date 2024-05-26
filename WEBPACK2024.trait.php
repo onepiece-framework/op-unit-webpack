@@ -200,9 +200,13 @@ trait OP_WEBPACK_2024
 	static private function _OutputSourceCode()
 	{
 		//	...
+		$minify = null;
+
+		//	...
 		switch( $mime = OP()->MIME() ){
 			case 'text/css':
 				$extension = 'css';
+				$minify    = OP()->Config('WebPack')[$extension]['minify'] ?? null;
 				break;
 			case 'text/javascript':
 				$extension = 'js';
@@ -227,8 +231,17 @@ trait OP_WEBPACK_2024
 		$session = & self::Session($extension) ?? [];
 
 		//	...
+		if( $minify ){
+			ob_start();
+		}
+		//	...
 		while( $file_path = array_shift($session) ){
 			$closure($file_path);
+		}
+		//	...
+		if( $minify ){
+			include_once(__DIR__.'/function/Minify.php');
+			echo Minify( ob_get_clean() );
 		}
 	}
 
