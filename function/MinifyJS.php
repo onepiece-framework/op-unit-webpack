@@ -49,6 +49,14 @@ function MinifyJS($js) {
 	$js = preg_replace('/else\nif/', 'else if', $js);
 	//	Compress multiple space character.
 	$js = preg_replace('/ +/', ' ', $js);
+	//	Remove space of human readable.
+	$js = preg_replace('|\s?([,:\-\+=\(\)\<\>])\s?|', '$1', $js);
+	//	$OP
+	$js = preg_replace('|\$OP|', '\$o1', $js);
+
+	//	Label
+	$js.= "\n".'console.log("MinifyJS");';
+
 	//	...
 	return $js;
 }
