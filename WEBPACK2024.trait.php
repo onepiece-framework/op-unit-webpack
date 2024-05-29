@@ -216,6 +216,27 @@ trait OP_WEBPACK_2024
 		}
 
 		//	...
+		$config = OP()->Config('WebPack')[$extension];
+
+		//	...
+		$cache = $config['cache'];
+
+		//	...
+		if( $cache and $hash = OP()->Request('hash') ){
+			/* @var $io boolean */
+			echo apcu_fetch($hash, $io);
+			if( $io ){
+				D('/* Hit cache */');
+				return;
+			}else{
+				D('/* No cache */');
+			}
+		}
+
+		//	...
+		$hash = self::Hash($extension);
+
+		//	...
 		self::_RegisterFilesFromDirectory();
 
 		//	...
@@ -227,16 +248,24 @@ trait OP_WEBPACK_2024
 		$session = & self::Session($extension) ?? [];
 
 		//	...
-		$minify = OP()->Config('WebPack')[$extension]['minify'] ?? null;
+		$minify = $config['minify'] ?? null;
 
 		//	...
-		if( $minify ){
-			ob_start();
-		}
+		ob_start();
+
 		//	...
 		while( $file_path = array_shift($session) ){
+			//	...
+			if( $config['debug'] ?? false and OP()->Env()->isAdmin() ){
+				echo 'console.log("'.$file_path.'");';
+			}
+			//	...
 			$closure($file_path);
 		}
+
+		//	...
+		$content = ob_get_clean();
+
 		//	...
 		if( $minify ){
 			//	...
@@ -245,14 +274,20 @@ trait OP_WEBPACK_2024
 
 			//	...
 			if( $minify === 'MinifyJS' ){
-				echo MinifyJS( ob_get_clean() );
+				$content = MinifyJS( $content );
 			}else
 			if( $minify === 'MinifyCSS' ){
-				echo MinifyCSS( ob_get_clean() );
+				$content = MinifyCSS( $content );
 			}else{
-				echo ob_get_clean();
+
 			}
 		}
+
+		//	...
+		apcu_store($hash, $content);
+
+		//	...
+		echo $content;
 	}
 
 	/** Cache
