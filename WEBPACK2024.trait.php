@@ -68,7 +68,7 @@ trait OP_WEBPACK_2024
 		$json = json_encode($session);
 
 		//	...
-		$hash = md5($json);
+		$hash = md5($json . $extension);
 		$hash = substr($hash, 0, 8);
 
 		//	...
