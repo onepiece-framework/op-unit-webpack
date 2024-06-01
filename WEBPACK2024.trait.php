@@ -148,6 +148,8 @@ trait OP_WEBPACK_2024
 
 				//	...
 				$session['dir'][] = $real_path;
+
+				//	...
 				continue;
 			}
 
@@ -166,10 +168,17 @@ trait OP_WEBPACK_2024
 				if( in_array($real_path, $session[$extension]) ){
 					continue;
 				}
+			}else{
+				//	Init
+				$session[$extension] = [];
 			}
 
 			//	Add file path.
-			$session[$extension][] = $real_path;
+			if( $extension === 'css' and basename($real_path) === 'import.css' ){
+				array_unshift($session[$extension], $real_path);
+			}else{
+				array_push($session[$extension], $real_path);
+			}
 		}
 	}
 
