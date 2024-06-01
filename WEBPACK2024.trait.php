@@ -217,6 +217,12 @@ trait OP_WEBPACK_2024
 
 		//	...
 		$config = OP()->Config('WebPack')[$extension];
+		$debug  = $config['debug'];
+
+		//	...
+		if(!OP()->Env()->isAdmin() ){
+			$debug = false;
+		}
 
 		//	...
 		$cache = $config['cache'];
@@ -225,11 +231,17 @@ trait OP_WEBPACK_2024
 		if( $cache and $hash = OP()->Request('hash') ){
 			/* @var $io boolean */
 			echo apcu_fetch($hash, $io);
+			//	...
+			if( $debug ){
+				D( $io ? 'Hit cache':'No cache' );
+			}
+			//	...
 			if( $io ){
-				D('/* Hit cache */');
 				return;
-			}else{
-				D('/* No cache */');
+			}
+		}else{
+			if( $debug ){
+				D('cache is false');
 			}
 		}
 
@@ -256,8 +268,8 @@ trait OP_WEBPACK_2024
 		//	...
 		while( $file_path = array_shift($session) ){
 			//	...
-			if( $config['debug'] ?? false and OP()->Env()->isAdmin() ){
-				echo 'console.log("'.$file_path.'");';
+			if( $debug ){
+				echo "/* $file_path */\n";
 			}
 			//	...
 			$closure($file_path);
