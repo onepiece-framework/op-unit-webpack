@@ -253,7 +253,7 @@ trait OP_WEBPACK_2024
 
 		//	...
 		$closure = function($file_path){
-			include($file_path);
+			require_once($file_path);
 		};
 
 		//	...
