@@ -217,11 +217,12 @@ trait OP_WEBPACK_2024
 
 		//	...
 		$config = OP()->Config('WebPack')[$extension];
-		$debug  = $config['debug'];
 
 		//	...
 		if(!OP()->Env()->isAdmin() ){
 			$debug = false;
+		}else{
+			$debug  = $config['debug'];
 		}
 
 		//	...
