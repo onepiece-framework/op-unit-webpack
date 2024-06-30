@@ -217,13 +217,7 @@ trait OP_WEBPACK_2024
 
 		//	...
 		$config = OP()->Config('WebPack')[$extension];
-
-		//	...
-		if(!OP()->Env()->isAdmin() ){
-			$debug = false;
-		}else{
-			$debug  = $config['debug'];
-		}
+		$debug  = OP()->Env()->isAdmin() ? $config['debug']: false;
 
 		//	...
 		$cache = $config['cache'];
