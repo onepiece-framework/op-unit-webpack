@@ -199,6 +199,7 @@ trait OP_WEBPACK_2024
 	 */
 	static private function _OutputSourceCode()
 	{
+		/*
 		//	...
 		switch( $mime = OP()->Env()->MIME() ){
 			case 'text/css':
@@ -213,6 +214,12 @@ trait OP_WEBPACK_2024
 			default:
 				OP()->Notice("This MIME is not support. ($mime)");
 				return;
+		}
+		*/
+
+		//	...
+		if(!$extension = include(__DIR__.'/include/GetExtension.php') ){
+			return;
 		}
 
 		//	...
