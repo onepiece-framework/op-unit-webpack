@@ -249,6 +249,7 @@ trait OP_WEBPACK_2024
 		//	...
 		$closure = function($file_path){
 			require_once($file_path);
+			echo PHP_EOL;
 		};
 
 		//	...
