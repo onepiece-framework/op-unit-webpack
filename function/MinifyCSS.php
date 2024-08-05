@@ -1,7 +1,7 @@
 <?php
 /** op-unit-webpack:/function/MinifyCSS.php
  *
- * @creation   2023-05-24
+ * @created    2024-05-24
  * @version    1.0
  * @package    op-unit-webpack
  * @author     Tomoaki Nagahara <tomoaki.nagahara@gmail.com>
