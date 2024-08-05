@@ -48,7 +48,7 @@ trait OP_WEBPACK_2024
 		if( empty($args) ){
 			self::_OutputSourceCode();
 		}else{
-			self::RegisterFiles($args);
+			self::Register($args);
 		}
 	}
 
@@ -73,11 +73,13 @@ trait OP_WEBPACK_2024
 		return $hash;
 	}
 
-	/** Register files.
+	/** Register landing method.
+	 *
+	 *  Change current directory to called webpack directory.s
 	 *
 	 * @param  array  $paths
 	 */
-	static public function RegisterFiles(array $paths)
+	static public function Register(array $paths)
 	{
 		//	Save current directory.
 		$save_dir = getcwd();
