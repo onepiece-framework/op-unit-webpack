@@ -73,9 +73,11 @@ trait OP_WEBPACK_2024
 		return $hash;
 	}
 
-	/** Register landing method.
+	/** Register() method is register files landing method.
 	 *
-	 *  Change current directory to called webpack directory.s
+	 * <pre>
+	 * Changes the current directory to the directory where it was called.
+	 * </pre>
 	 *
 	 * @param  array  $paths
 	 */
@@ -86,18 +88,41 @@ trait OP_WEBPACK_2024
 
 		//	Change client file directory.
 		$traces = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 2);
-		$file   = $traces[1]['file'];
-		chdir( dirname($file) );
-		unset($traces, $file);
 
-		//	...
+		//	Search the called directory.
+		foreach( $traces as $trace ){
+			//	...
+			$class    = $trace['class']    ?? null;
+			$function = $trace['function'] ?? null;
+
+			//	...
+			if( $class !== __CLASS__ ){
+				continue;
+			}
+
+			//	...
+			if( $function !== __FUNCTION__ or $function !== 'Auto' ){
+				continue;
+			}
+
+			//	Change current directory.
+			chdir( dirname($trace['file']) );
+
+			//	...
+			break;
+		}
+
+		//	unset
+		unset($traces, $trace);
+
+		//	Real register files method.
 		self::_RegisterFiles($paths);
 
 		//	Recovery current directory.
 		chdir($save_dir);
 	}
 
-	/** Register files.
+	/** Real register files method.
 	 *
 	 * @param  array  $paths
 	 */
