@@ -1,5 +1,5 @@
 <?php
-/** op-unit-webpack:/include/GetExtension.php
+/** op-unit-webpack:/include/GetExtensionFromMIME.php
  *
  * @created    2024-07-07
  * @version    2.0
