@@ -196,32 +196,11 @@ trait OP_WEBPACK_2024
 
 	/** Output source code.
 	 *
+	 * @created    2024-??-??
+	 * @changed    2024-08-05  private _OutputSourceCode() --> public Output()
 	 */
-	static private function _OutputSourceCode()
+	static public function Output(string $extension)
 	{
-		/*
-		//	...
-		switch( $mime = OP()->Env()->MIME() ){
-			case 'text/css':
-				$extension = 'css';
-				break;
-			case 'text/javascript':
-				$extension = 'js';
-				break;
-			case 'text/markdown':
-				$extension = 'md';
-				break;
-			default:
-				OP()->Notice("This MIME is not support. ($mime)");
-				return;
-		}
-		*/
-
-		//	...
-		if(!$extension = include(__DIR__.'/include/GetExtension.php') ){
-			return;
-		}
-
 		//	...
 		$config = OP()->Config('WebPack')[$extension];
 		$debug  = OP()->Env()->isAdmin() ? $config['debug']: false;
@@ -260,7 +239,9 @@ trait OP_WEBPACK_2024
 		};
 
 		//	...
-		$session = & self::Session($extension) ?? [];
+		if(!$session = & self::Session($extension) ?? [] ){
+			return;
+		}
 
 		//	...
 		$minify = $config['minify'] ?? null;
@@ -286,6 +267,7 @@ trait OP_WEBPACK_2024
 			//	...
 			$minify = 'Minify' . strtoupper($extension);
 			require_once(__DIR__."/function/{$minify}.php");
+		//	$content = $minify( $content );
 
 			//	...
 			if( $minify === 'MinifyJS' ){
