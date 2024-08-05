@@ -332,6 +332,30 @@ trait OP_WEBPACK_2024
 		echo $content;
 	}
 
+	/** Prepare output
+	 *
+	 * <pre>
+	 * 1. Set MIME from extension.
+	 * 1. Set layout execute.
+	 * 1. Set layout js and css.
+	 * </pre>
+	 *
+	 * @created    2024-08-06
+	 */
+	static public function Prepare(?string & $extension)
+	{
+		//	Layout is change to off.
+		OP()->Layout(false);
+
+		//	Get extension from request URL.
+		$extension = require(__DIR__.'/include/GetExtensionFromURL.php');
+
+		//	Get specified layout name.
+		if( $layout = OP()->Request('layout') ){
+			self::Register("asset:/layout/{$layout}/{$extension}/");
+		}
+	}
+
 	/** Cache
 	 *
 	 * @param  string  $extension
