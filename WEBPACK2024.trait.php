@@ -46,7 +46,9 @@ trait OP_WEBPACK_2024
 	{
 		//	...
 		if( empty($args) ){
-			self::_OutputSourceCode();
+			$extension = null;
+			self::Prepare($extension);
+			self::Output($extension);
 		}else{
 			self::Register($args);
 		}
