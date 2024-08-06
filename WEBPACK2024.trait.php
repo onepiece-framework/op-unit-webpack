@@ -116,7 +116,16 @@ trait OP_WEBPACK_2024
 		unset($traces, $trace);
 
 		//	Real register files method.
-		self::_RegisterFiles($paths);
+		switch( $type = gettype($paths) ){
+			case 'array':
+				self::_RegisterFiles($paths);
+				break;
+			case 'string':
+				self::_RegisterFiles([$paths]);
+				break;
+			default:
+				OP()->Notice("This argument type is not supported. `{$type}`");
+		}
 
 		//	Recovery current directory.
 		chdir($save_dir);
