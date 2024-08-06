@@ -79,9 +79,9 @@ trait OP_WEBPACK_2024
 	 * Changes the current directory to the directory where it was called.
 	 * </pre>
 	 *
-	 * @param  array  $paths
+	 * @param  string|array  $paths
 	 */
-	static public function Register(array $paths)
+	static public function Register(string|array $paths)
 	{
 		//	Save current directory.
 		$save_dir = getcwd();
