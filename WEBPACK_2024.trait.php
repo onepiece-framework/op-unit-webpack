@@ -31,7 +31,7 @@ use OP\OP_SESSION;
  * @author     Tomoaki Nagahara <tomoaki.nagahara@gmail.com>
  * @copyright  Tomoaki Nagahara All right reserved.
  */
-trait OP_WEBPACK_2024
+trait WEBPACK_2024
 {
 	/** trait
 	 *
