@@ -19,4 +19,4 @@ declare(strict_types=1);
 namespace OP;
 
 //	...
-include_once(__DIR__.'/WebPack2024.class.php');
+include_once(__DIR__.'/WebPack.class.php');
