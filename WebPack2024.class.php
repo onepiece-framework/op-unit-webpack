@@ -29,7 +29,7 @@ use OP\UNIT\WEBPACK\OP_WEBPACK_2024;
 /** Include
  *
  */
-include_once(__DIR__.'/WEBPACK2024.trait.php');
+include_once(__DIR__.'/WEBPACK_2024.trait.php');
 
 /** WebPack
  *
