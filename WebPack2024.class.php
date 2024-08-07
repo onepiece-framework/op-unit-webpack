@@ -24,7 +24,7 @@ namespace OP\UNIT;
 use OP\OP_CORE;
 use OP\IF_UNIT;
 use OP\IF_WEBPACK;
-use OP\UNIT\WEBPACK\OP_WEBPACK_2024;
+use OP\UNIT\WEBPACK\WEBPACK_2024;
 
 /** Include
  *
@@ -45,5 +45,5 @@ class WebPack implements IF_UNIT, IF_WEBPACK
 	 *
 	 */
 	use OP_CORE;
-	use OP_WEBPACK_2024;
+	use WEBPACK_2024;
 }
