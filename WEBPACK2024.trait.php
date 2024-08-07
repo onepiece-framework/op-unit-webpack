@@ -87,7 +87,7 @@ trait OP_WEBPACK_2024
 		$save_dir = getcwd();
 
 		//	Change client file directory.
-		$traces = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 2);
+		$traces = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS);
 
 		//	Search the called directory.
 		foreach( $traces as $trace ){
