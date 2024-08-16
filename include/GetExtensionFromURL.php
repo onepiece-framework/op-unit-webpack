@@ -28,7 +28,7 @@ if( $pos = strpos($uri, '?') ){
 
 //	Find the file extension.
 if( $pos = strrpos($uri, '.') ){
-	$ext = substr($uri, $pos -1);
+	$ext = substr($uri, $pos +1);
 }else{
 	//	Remove slash from tail : /webpack/css/ --> /webpack/css
 	$uri = rtrim($uri, '/');
