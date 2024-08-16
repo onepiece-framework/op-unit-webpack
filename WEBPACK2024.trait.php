@@ -91,8 +91,13 @@ trait OP_WEBPACK_2024
 		//	Change client file directory.
 		$traces = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS);
 
+		//	...
+		$asset_root = OP()->MetaPath('asset:/');
+		$asset_root = realpath($asset_root);
+
 		//	Search the called directory.
 		foreach( $traces as $trace ){
+			/*
 			//	...
 			$class    = $trace['class']    ?? null;
 			$function = $trace['function'] ?? null;
@@ -106,9 +111,23 @@ trait OP_WEBPACK_2024
 			if( $function !== __FUNCTION__ or $function !== 'Auto' ){
 				continue;
 			}
+			*/
+
+			//	...
+			$file     = $trace['file']     ?? null;
+
+			//	core
+			if( 0 === strpos($file, $asset_root.'/core/') ){
+				continue;
+			}
+
+			//	unit/webpack
+			if( 0 === strpos($file, $asset_root.'/unit/webpack/') ){
+				continue;
+			}
 
 			//	Change current directory.
-			chdir( dirname($trace['file']) );
+			chdir( dirname($file) );
 
 			//	...
 			break;
