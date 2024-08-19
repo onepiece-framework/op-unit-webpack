@@ -83,7 +83,7 @@ trait OP_WEBPACK_2024
 	 *
 	 * @param  string|array  $paths
 	 */
-	static public function Register(string|array $paths)
+	static public function Register($paths)
 	{
 		//	Save current directory.
 		$save_dir = getcwd();
