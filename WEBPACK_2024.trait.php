@@ -268,10 +268,12 @@ trait WEBPACK_2024
 	static public function Output(string $extension)
 	{
 		//	...
-		$config = OP()->Config('WebPack')[$extension];
-		$debug  = OP()->Env()->isAdmin() ? $config['debug']: false;
-
-		//	...
+		$configs = OP()->Config('WebPack');
+		$config  = $configs[$extension];
+		if( \OP\Env::isAdmin() ){
+			$config = array_merge($config, $configs['admin'] ?? []);
+		}
+		$debug = \OP\Env::isAdmin() ? $config['debug']: false;
 		$cache = $config['cache'];
 
 		//	...
