@@ -18,20 +18,17 @@ declare(strict_types=1);
  */
 namespace OP\UNIT\WEBPACK;
 
-//	...
-$cache = OP()->Env()->isAdmin() ? false: true;
-
 //	In case of JavaScript.
 $js = [
 	'debug' =>  false,	 // for debug flag
-	'cache' => $cache,	 // file, apcu, memcache
+	'cache' =>  true,	 // file, apcu, memcache
 	'minify'=>  true,	 // File compression. Remove space character and comment.
 ];
 
 //	In case of style sheet.
 $css = [
 	'debug' =>  false,	 // for debug flag
-	'cache' => $cache,	 // file, apcu, memcache
+	'cache' =>  true,	 // file, apcu, memcache
 	'minify'=>  true,	 // File compression. Remove space character and comment.
 ];
 
