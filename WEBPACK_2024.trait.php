@@ -394,4 +394,15 @@ trait WEBPACK_2024
 	{
 		self::Config('cache');
 	}
+
+	/** Get file list from extension.
+	 *
+	 * @created    2024-11-05
+	 * @param      string     $extension
+	 * @return    &array      $file_list
+	 */
+	static function & FileList(string $extension)
+	{
+		return self::Session($extension);
+	}
 }
