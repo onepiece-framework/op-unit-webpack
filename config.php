@@ -34,7 +34,9 @@ $css = [
 
 //	In case of is Admin.
 $admin = [
-
+//	'debug'  => false,
+	'cache'  => false,
+//	'minify' => true,
 ];
 
 //	...
