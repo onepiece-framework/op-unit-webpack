@@ -369,7 +369,7 @@ trait WEBPACK_2024
 	 *
 	 * @created    2024-08-06
 	 */
-	static public function Prepare(?string & $extension)
+	static public function Prepare(        & $extension)
 	{
 		//	Layout is change to off.
 		OP()->Layout(false);
