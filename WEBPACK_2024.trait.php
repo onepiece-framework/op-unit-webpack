@@ -269,7 +269,7 @@ trait WEBPACK_2024
 	{
 		//	...
 		$configs = OP()->Config('WebPack');
-		$config  = $configs[$extension];
+		$config  = $configs[$extension] ?? [];
 
 		//	...
 		if( \OP\Env::isAdmin() ){
