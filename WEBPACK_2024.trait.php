@@ -277,7 +277,7 @@ trait WEBPACK_2024
 		}
 
 		//	...
-		$debug = \OP\Env::isAdmin() ? $config['debug']: false;
+		$debug = \OP\Env::isAdmin() ? $config['debug'] ?? null: false;
 		$cache = $config['cache'] ?? null;
 
 		//	...
