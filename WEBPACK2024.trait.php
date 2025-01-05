@@ -272,7 +272,7 @@ trait OP_WEBPACK_2024
 		$debug  = OP()->Env()->isAdmin() ? $config['debug']: false;
 
 		//	...
-		$cache = $config['cache'];
+		$cache = $config['cache'] ?? null;
 
 		//	...
 		if( $cache and $hash = OP()->Request('hash') ){
