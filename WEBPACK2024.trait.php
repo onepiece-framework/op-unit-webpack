@@ -268,7 +268,7 @@ trait OP_WEBPACK_2024
 	static public function Output(string $extension)
 	{
 		//	...
-		$config = OP()->Config('WebPack')[$extension];
+		$config = OP()->Config('WebPack')[$extension] ?? [];
 		$debug  = OP()->Env()->isAdmin() ? $config['debug']: false;
 
 		//	...
