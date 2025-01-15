@@ -40,7 +40,10 @@ if( $pos = strrpos($uri, '.') ){
 
 //	If not found.
 if( empty($ext) ){
+	/*
 	OP()->Notice("The extension could not be found. `{$_SERVER['REQUEST_URI']}`");
+	*/
+	throw new \Exception("The extension could not be found. `{$_SERVER['REQUEST_URI']}`");
 }
 
 //	Return extension.
