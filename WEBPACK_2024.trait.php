@@ -324,6 +324,12 @@ trait WEBPACK_2024
 		//	...
 		while( $file_path = array_shift($session) ){
 			//	...
+			$file_name = basename($file_path);
+			if( '_' === $file_name[0] ){
+				continue;
+			}
+
+			//	...
 			if( $debug ){
 				echo "/* $file_path */\n";
 			}
